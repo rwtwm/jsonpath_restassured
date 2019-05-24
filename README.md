@@ -1,6 +1,6 @@
 ### Rest Assured API testing with JSONpath mapping
 
-The 'main' code area introduces json path syntax to expose the [carbon intensity API](https://carbon-intensity.github.io/api-definitions/#carbon-intensity-api-v2-0-0). Usage details TBA.
+The 'main' code area introduces json path syntax to expose the [world bank climate data API](https://datahelpdesk.worldbank.org/knowledgebase/articles/902061-climate-data-api). Usage details TBA.
 
 The test area builds on this knowledge with tests written with [rest-assured](http://rest-assured.io/) in gherkin syntax.
 
