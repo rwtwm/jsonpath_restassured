@@ -1,4 +1,4 @@
-package com.sparta.waj.climatedata;
+package com.sparta.waj.requestmanagement;
 
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;

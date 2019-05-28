@@ -1,4 +1,4 @@
-package com.sparta.waj.climatedata;
+package com.sparta.waj.climatedata.climatedataobjects;
 
 import io.restassured.path.json.JsonPath;
 
@@ -10,15 +10,29 @@ public class ModelTempData
     private int yearStart;
     private int yearEnd;
     private String modelName;
-    private List<Double> tempMeans;
+    private List<Float> tempMeans;
 
-    public ModelTempData(String jsonString)
+    public ModelTempData(String modelName, int yearStart, int yearEnd, List<Float> tempMeans)
     {
-        JsonPath path = JsonPath.from(jsonString);
-        tempMeans = path.getList("monthVals");
-        yearStart = path.getInt("fromYear");
-        yearEnd = path.getInt("toYear");
-        modelName = path.getString("gcm");
+        this.tempMeans  =  tempMeans;
+        this.yearStart = yearStart ;
+        this.yearEnd = yearEnd;
+        this.modelName = modelName;
+    }
+
+    public int getYearStart()
+    {
+        return yearStart;
+    }
+
+    public int getYearEnd()
+    {
+        return yearEnd;
+    }
+
+    public String getModelName()
+    {
+        return modelName;
     }
 
     public double getJanMean()
