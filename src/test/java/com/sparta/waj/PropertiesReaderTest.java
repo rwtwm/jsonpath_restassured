@@ -9,7 +9,8 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
+
 
 public class PropertiesReaderTest
 {
@@ -46,6 +47,13 @@ public class PropertiesReaderTest
         editProperty("start_year", year);
         PropertiesReader reader = new PropertiesReader();
         assertEquals(reader.getStartYear(), year);
+    }
+
+    @Test
+    public void testEndpointNoSpaces()
+    {
+        PropertiesReader reader = new PropertiesReader();
+        assertFalse(reader.getEndpoint(true).contains(" "));
     }
 
     /**

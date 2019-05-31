@@ -23,13 +23,19 @@ public class PropertiesReader
         {
             e.printStackTrace();
         }
-
     }
 
-
-    public String getEndpoint()
+    public String getEndpoint(boolean monthly)
     {
-        return properties.getProperty("base_url");
+        String period = monthly ? "mavg" : "annualavg";
+        String endYear = String.valueOf(startYear + 19);
+
+        return properties.getProperty("base_url")
+                + "/" + monthly
+                + "/tas/"
+                + getStartYear()
+                + endYear
+                + getCountryCode();
     }
 
     public String getStartYear()
@@ -41,6 +47,18 @@ public class PropertiesReader
         }
         startYear = Integer.parseInt(year);
         return year;
+    }
+
+
+    public String getCountryCode()
+    {
+        String country = properties.getProperty("country_code");
+
+        if(country.equals(""))
+        {
+            return "gbr";
+        }
+        return country;
     }
 
 
