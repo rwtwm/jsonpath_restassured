@@ -10,6 +10,8 @@ public class PropertiesReader
     private static final String FILE_LOC = "resources/climateurl.properties";
     private Properties properties;
 
+    private int startYear;
+
     public PropertiesReader()
     {
         try
@@ -33,6 +35,13 @@ public class PropertiesReader
     public String getStartYear()
     {
         String year = properties.getProperty("start_year");
+        if (year.equals(""))
+        {
+            year = "1980";
+        }
+        startYear = Integer.parseInt(year);
         return year;
     }
+
+
 }

@@ -1,21 +1,51 @@
 package com.sparta.waj;
 
+import com.sparta.waj.requestmanagement.PropertiesReader;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class PropertiesReaderTest
 {
     private static final String FILE_LOC = "resources/climateurl.properties";
 
+    private static PropertiesReader reader;
+    private static List<String> propertiesStore;
+
+    @Before
+    public void setup() throws IOException
+    {
+        storeProperties();
+    }
+
+    private void storeProperties() throws IOException
+    {
+        propertiesStore = captureProperties();
+    }
+
+    //Properties reader needs to be opened after the property is set.
     @Test
     public void testYearDefault() throws IOException
     {
-        editProperty("start_year","1980");
+        editProperty("start_year","");
+        PropertiesReader reader = new PropertiesReader();
+        assertEquals(reader.getStartYear(),"1980");
+    }
+
+    //Properties reader needs to be opened after the property is set.
+    @Test
+    public void testStartYearRead() throws IOException
+    {
+        String year = "1940";
+        editProperty("start_year", year);
+        PropertiesReader reader = new PropertiesReader();
+        assertEquals(reader.getStartYear(), year);
     }
 
     /**
@@ -72,5 +102,11 @@ public class PropertiesReaderTest
         reader.close();
 
         return propertiesText;
+    }
+
+    @After
+    public void resetProperties() throws IOException
+    {
+        writeProperties(propertiesStore);
     }
 }
