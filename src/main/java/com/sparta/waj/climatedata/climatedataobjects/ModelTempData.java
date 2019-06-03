@@ -1,7 +1,5 @@
 package com.sparta.waj.climatedata.climatedataobjects;
 
-import io.restassured.path.json.JsonPath;
-
 import java.util.List;
 
 public class ModelTempData

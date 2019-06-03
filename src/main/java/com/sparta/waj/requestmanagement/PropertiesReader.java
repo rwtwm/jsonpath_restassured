@@ -25,10 +25,17 @@ public class PropertiesReader
         }
     }
 
+    /**
+     * Reviews the properties file and constructs a URL based on the arguments present.
+     * The switch between monthly and annual values is made in the method call.
+     * @param monthly - boolean. Is the data monthly or annual average
+     * @return - String to be converted into URI for data access.
+     */
     public String getEndpoint(boolean monthly)
     {
         String period = monthly ? "mavg" : "annualavg";
-        String endYear = String.valueOf(startYear + 19);
+        String startYear = getStartYear();
+        String endYear = String.valueOf(this.startYear + 19);
 
         return properties.getProperty("base_url")
                 + "/" + monthly
