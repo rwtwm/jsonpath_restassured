@@ -17,6 +17,7 @@ public class ClimateDataArray
     {
         this.arrayData = arrayData;
         climateData = new HashMap<>();
+        constructMap();
     }
 
     //This is not the most effective way of parsing the data. Instead this

@@ -1,4 +1,4 @@
-package com.sparta.waj;
+package com.sparta.waj.codetesting;
 
 import com.sparta.waj.requestmanagement.PropertiesReader;
 import org.junit.After;
@@ -47,6 +47,13 @@ public class PropertiesReaderTest
         editProperty("start_year", year);
         PropertiesReader reader = new PropertiesReader();
         assertEquals(reader.getStartYear(), year);
+    }
+
+    @Test
+    public void displayEndpoint()
+    {
+        PropertiesReader reader = new PropertiesReader();
+        System.out.println(reader.getEndpoint(true));
     }
 
     @Test

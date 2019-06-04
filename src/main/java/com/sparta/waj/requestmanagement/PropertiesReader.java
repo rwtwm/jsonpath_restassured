@@ -38,11 +38,11 @@ public class PropertiesReader
         String endYear = String.valueOf(this.startYear + 19);
 
         return properties.getProperty("base_url")
-                + "/" + monthly
+                + "/" + period
                 + "/tas/"
                 + getStartYear()
-                + endYear
-                + getCountryCode();
+                + "/" + endYear
+                + "/" + getCountryCode();
     }
 
     public String getStartYear()
