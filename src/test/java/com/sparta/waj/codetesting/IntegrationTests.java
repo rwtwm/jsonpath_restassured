@@ -4,13 +4,11 @@ import com.sparta.waj.climatedata.climatedataobjects.ClimateDataArray;
 import com.sparta.waj.climatedata.climatedataobjects.ModelTempData;
 import com.sparta.waj.requestmanagement.ClimateDataAccessor;
 import com.sparta.waj.requestmanagement.PropertiesReader;
+import com.sun.tools.xjc.model.Model;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import static org.junit.Assert.*;
 
@@ -43,14 +41,17 @@ public class IntegrationTests
     /**
      * Checks that the July value for any given year is higher than the january value.
      * Only works if the country code specified in the properties file is in the northern hemisphere.
+     *
+     * Uses iterator to avoid reference to keys in array.
      */
     @Test
     public void tempSenseCheck()
     {
         Map<String, ModelTempData> climateData = dataArray.getClimateData();
+        Iterator<ModelTempData> dataIterator = climateData.values().iterator();
 
-        
-
+        ModelTempData testData = dataIterator.next();
+        assertTrue(testData.getJunMean()>testData.getJanMean());
     }
 
 
