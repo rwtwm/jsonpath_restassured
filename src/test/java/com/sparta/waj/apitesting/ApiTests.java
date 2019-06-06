@@ -4,6 +4,8 @@ import io.restassured.response.Response;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.util.concurrent.TimeUnit;
+
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 
@@ -34,7 +36,7 @@ public class ApiTests
 
     /**
      * If an invalid parameter combination is given, an empty json object is returned
-     * rather than an error code. The 'empty()' Hamcrest matcher is used to confirm this.  
+     * rather than an error code. The 'empty()' Hamcrest matcher is used to confirm this.
      */
     @Test
     public void testAnomalyPastFail()
@@ -44,6 +46,53 @@ public class ApiTests
         .then()
             .body("$",empty());
     }
+
+    /**
+     * Note that restAssured parses decimal values as floats.
+     */
+    @Test
+    public void testValueType()
+    {
+        when().
+            get("mavg/tas/1980/1999/gbr")
+        .then()
+            .statusCode(200)
+            .and()
+            .body("[3].monthVals[6]",isA(float.class));
+    }
+
+
+    /**
+     * Rudimentary performance testing. Note that the time taken requires a 'long'.
+     * The argument specifying the TimeUnit is optional. 
+     */
+    @Test
+    public void testTimeTaken()
+    {
+        when()
+            .get("$")
+        .then()
+            .time(lessThan(3L), TimeUnit.SECONDS);
+    }
+
+
+    /**
+     * Demonstrates the 'peek()' method which can be helpful in understanding
+     * the structure of the json record. Also shows the syntax for storing responses.
+     * Use response.then() to obtain a ValidatableResponse
+     */
+    @Test
+    public void testValueResponse()
+    {
+        Response response = get("annualavg/tas/1980/1999/gbr").then().extract().response();
+
+        response.body().peek();
+    }
+
+
+
+
+
 
 
 
