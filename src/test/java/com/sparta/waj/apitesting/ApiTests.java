@@ -90,7 +90,7 @@ public class ApiTests
     }
 
 
-    //Demonstration of status code check.  
+    //Demonstration of status code check.
     @Test
     public void malformedUrlCheck()
     {
