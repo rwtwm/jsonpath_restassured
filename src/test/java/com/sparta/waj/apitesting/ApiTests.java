@@ -64,7 +64,7 @@ public class ApiTests
 
     /**
      * Rudimentary performance testing. Note that the time taken requires a 'long'.
-     * The argument specifying the TimeUnit is optional. 
+     * The argument specifying the TimeUnit is optional.
      */
     @Test
     public void testTimeTaken()
@@ -89,6 +89,18 @@ public class ApiTests
         response.body().peek();
     }
 
+
+    //Demonstration of status code check.  
+    @Test
+    public void malformedUrlCheck()
+    {
+        //given
+        baseURI = "http://climatedataapi.worldbank.org/climateweb/rest/v1//";
+        when()
+            .get("manom/tas/1960/1979/DEU")
+        .then()
+            .statusCode(404);
+    }
 
 
 
